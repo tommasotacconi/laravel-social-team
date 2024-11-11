@@ -16,9 +16,9 @@ class PostSeeder extends Seeder
     {
         for($i = 0; $i < 100; $i++) {
             $newPost = new Post();
-            $newPost->name = $faker->firstName();
+            $newPost->title = $faker->word() . ' ' .$faker->word();
             $newPost->author = $faker->firstName() .' '. $faker->unique()->lastName();
-            $newPost->description = $faker->realTextBetween(150, 450);
+            $newPost->content = $faker->realTextBetween(150, 250);
             $newPost->save();
     }
-}
+}}
