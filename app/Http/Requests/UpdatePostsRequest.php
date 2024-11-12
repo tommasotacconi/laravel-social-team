@@ -11,7 +11,7 @@ class UpdatePostsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class UpdatePostsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => "required|string|min:2|max:30",
+            "description" => "required|string|min:20",
+            "author" => "required|string|min:2|max:50"
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            "title.required" => "Il titolo è obbligatorio",
+            "title.min" => "Il titolo deve essere composto da almeno 2 caratteri",
+            "description.required" => "La descrizione è obbligatoria",
+            "description.min" => "La descrizione deve essere più lunga di 20 caratteri",
+            "author.required" => "L'autore è obbligatorio",
+            "author.min" => "Il nome autore deve essere composto da almeno 2 caratteri"
+            ];
     }
 }

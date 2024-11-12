@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Request\UpdatePostsRequest;
 
+
 class PostController extends Controller
 {
     //
