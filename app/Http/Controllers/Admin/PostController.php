@@ -11,29 +11,38 @@ use App\Models\Post;
 class PostController extends Controller
 {
     //
-    public function index () {
+    public function index()
+    {
         $posts = Post::all();
 
-        return view ('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts'));
     }
 
+    public function show($id)
+    {
         $post = Post::findOrFail($id);
 
+        return view('admin.posts.show', compact('post'));
+    }
 
-    public function create () {
+
+    public function create()
+    {
         return view('admin.posts.create');
     }
 
-    public function store (Request $request, string $id) {
+    public function store(Request $request, string $id)
+    {
         $new_post = Post::create($request->all());
         return redirect()->route('admin.posts.show', compact('id'));
     }
 
     public function edit() {}
 
-    public function update() {}
 
-    public function update (UpdatePostsRequest $request, string $id) {
+
+    public function update(UpdatePostsRequest $request, string $id)
+    {
 
         $request->validated();
 
@@ -46,10 +55,8 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route("admin.posts.show", [ "id"=> $post->id] );
+        return redirect()->route("admin.posts.show", ["id" => $post->id]);
     }
 
-    public function destroy () {
-
-    }
+    public function destroy() {}
 }
