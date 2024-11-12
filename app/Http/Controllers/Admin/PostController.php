@@ -17,9 +17,8 @@ class PostController extends Controller
         return view ('admin.posts.index', compact('posts'));
     }
 
-    public function show () {
+        $post = Post::findOrFail($id);
 
-    }
 
     public function create () {
         return view('admin.posts.create');
@@ -30,9 +29,9 @@ class PostController extends Controller
         return redirect()->route('admin.posts.show', compact('id'));
     }
 
-    public function edit () {
+    public function edit() {}
 
-    }
+    public function update() {}
 
     public function update (UpdatePostsRequest $request, string $id) {
 
