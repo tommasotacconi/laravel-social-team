@@ -3,36 +3,60 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdatePostsRequest;
 use Illuminate\Http\Request;
+use App\Models\Post;
+
 
 class PostController extends Controller
 {
     //
-    public function index () {
+    public function index()
+    {
+        $posts = Post::all();
 
+        return view('admin.posts.index', compact('posts'));
     }
 
-    public function show () {
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
 
+        return view('admin.posts.show', compact('post'));
     }
 
-    public function create () {
 
+    public function create()
+    {
+        return view('admin.posts.create');
     }
 
-    public function store () {
-
+    public function store(Request $request, string $id)
+    {
+        $new_post = Post::create($request->all());
+        return redirect()->route('admin.posts.show', compact('id'));
     }
 
-    public function edit () {
+    public function edit() {}
 
+
+
+    public function update(UpdatePostsRequest $request, string $id)
+    {
+
+        $request->validated();
+
+        $newData = $request->all();
+
+        $post = Post::findOrFail($id);
+        $post->title = $newData["title"];
+        $post->author = $newData["author"];
+        $post->description = $newData["description"];
+
+        $post->save();
+
+        return redirect()->route("admin.posts.show", ["id" => $post->id]);
     }
 
-    public function update () {
-
-    }
-
-    public function destroy () {
-
-    }
+    public function destroy() {}
 }
