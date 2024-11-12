@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
